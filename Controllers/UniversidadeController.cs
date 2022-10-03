@@ -13,17 +13,29 @@ namespace Universidade_Api.Controllers
     [ApiController]
     public class UniversidadeController : ControllerBase
     {
-        private readonly UniversidadeContext _context;
+        private readonly CursoContext _context;
 
-        public UniversidadeController(UniversidadeContext context)
+        public UniversidadeController(CursoContext context)
         {
             _context = context;
+        }
+        [HttpGet("/")]
+        public void PopulateCursos()
+        {
+            _context.Curso.Add(new Curso { Sigla = "LES", Nome = "Licenciatura em engenharia de sistemas" });
+            _context.Curso.Add(new Curso { Sigla = "LEI", Nome = "Licenciatura em engenharia informatica" });
+            _context.Curso.Add(new Curso { Sigla = "LEM", Nome = "Licenciatura em engenharia mecanica" });
+            _context.Curso.Add(new Curso { Sigla = "LEA", Nome = "Licenciatura em engenharia aeronautica" });
+            _context.Curso.Add(new Curso { Sigla = "LEQ", Nome = "Licenciatura em engenharia quimica" });
+            _context.Curso.Add(new Curso { Sigla = "LEP", Nome = "Licenciatura em engenharia petrolifera" });
+            _context.SaveChangesAsync();
         }
 
         // GET: api/Universidade/cursos/
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Curso>>> GetCurso()
         {
+
             if (_context.Curso == null)
             {
                 return NotFound();
@@ -32,7 +44,7 @@ namespace Universidade_Api.Controllers
         }
 
         // GET: api/Universidade/cursos/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Curso>> GetCurso(long id)
         {
             if (_context.Curso == null)
@@ -49,15 +61,15 @@ namespace Universidade_Api.Controllers
             return curso;
         }
 
-        // GET: api/Universidade/cursos2/LES
-        [HttpGet("{Sigla}")]
-        public async Task<ActionResult<Curso>> GetCursoSigla(string sigla)
+        // GET: api/Universidade/cursos/LES
+        [HttpGet("{sigla}")]
+        public async Task<ActionResult<Curso>> GetCurso(string sigla)
         {
             if (_context.Curso == null)
             {
                 return NotFound();
             }
-            var curso = await _context.Curso.FindAsync(sigla);
+            var curso = await _context.Curso.Where(c => c.Sigla == sigla).FirstOrDefaultAsync();
 
             if (curso == null)
             {
@@ -66,6 +78,7 @@ namespace Universidade_Api.Controllers
 
             return curso;
         }
+
 
         // PUT: api/Universidade/cursos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

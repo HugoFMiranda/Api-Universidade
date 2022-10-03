@@ -10056,19 +10056,19 @@
     ]
   },
   "packageFolders": {
-    "/home/hugo/.nuget/packages/": {}
+    "C:\\Users\\Hugo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/hugo/Desktop/Universidade-Api/Universidade-Api.csproj",
+      "projectUniqueName": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj",
       "projectName": "Universidade-Api",
-      "projectPath": "/home/hugo/Desktop/Universidade-Api/Universidade-Api.csproj",
-      "packagesPath": "/home/hugo/.nuget/packages/",
-      "outputPath": "/home/hugo/Desktop/Universidade-Api/obj/",
+      "projectPath": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj",
+      "packagesPath": "C:\\Users\\Hugo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/hugo/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Hugo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -10134,7 +10134,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
