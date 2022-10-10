@@ -27,7 +27,7 @@ namespace Universidade_Api.Controllers
             {
                 Id = aluno.Id,
                 Nome = aluno.Nome,
-                SiglaCurso = getSigla(aluno.Curso)
+                SiglaCurso = aluno.Curso
             };
         }
 
@@ -42,6 +42,7 @@ namespace Universidade_Api.Controllers
             }
             return firstLetters;
         }
+
         // GET: api/Aluno
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AlunoDTO>>> GetAluno()
@@ -88,6 +89,7 @@ namespace Universidade_Api.Controllers
             }
 
             aluno.Nome = alunoDTO.Nome;
+            aluno.Curso = alunoDTO.SiglaCurso;
 
             try
             {
@@ -108,7 +110,8 @@ namespace Universidade_Api.Controllers
         {
             var aluno = new Aluno
             {
-                Nome = alunoDTO.Nome
+                Nome = alunoDTO.Nome,
+                Curso = alunoDTO.SiglaCurso
             };
 
             _context.Aluno.Add(aluno);
