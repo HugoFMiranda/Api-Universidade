@@ -2,74 +2,77 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api_Universidade.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Universidade_Api.Models;
+using Universidade_Api;
 
 namespace Universidade_Api.Controllers
 {
-    [Route("api/universidade/[controller]")]
+    [Route("api/[controller]s")]
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        private readonly AlunoContext _context;
+        private readonly UniversidadeContext _context;
 
-        public AlunoController(AlunoContext context)
+        public AlunoController(UniversidadeContext context)
         {
             _context = context;
         }
 
         private static AlunoDTO AlunoToDTO(Aluno aluno)
         {
+            ICollection<string?>? siglasucs = aluno.UnidadesCurriculares?.Select(uc => uc.Sigla).ToList();
+            var siglacurso = aluno.Curso?.Sigla;
             return new AlunoDTO
             {
                 Id = aluno.Id,
                 Nome = aluno.Nome,
-                SiglaCurso = aluno.Curso
+                SiglaCurso = siglacurso,
+                SiglasUcs = siglasucs
             };
-        }
-
-        private static string getSigla(String curso)
-        {
-            string text = curso;
-            string firstLetters = "";
-
-            foreach (var part in text.Split(' '))
-            {
-                firstLetters += part.Substring(0, 1);
-            }
-            return firstLetters;
         }
 
         // GET: api/Aluno
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AlunoDTO>>> GetAluno()
         {
-            if (_context.Aluno == null)
+            if (_context.Alunos == null)
             {
-                return NotFound();
+                return NotFound("Alunos not found");
             }
-            return await _context.Aluno.Select(x => AlunoToDTO(x)).ToListAsync();
+            return await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).Select(x => AlunoToDTO(x)).ToListAsync();
         }
 
         // GET: api/Aluno/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<AlunoDTO>> GetAluno(long id)
         {
-            if (_context.Aluno == null)
+            if (_context.Alunos == null)
             {
-                return NotFound();
+                return NotFound("Alunos is null");
             }
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
 
             if (aluno == null)
             {
-                return NotFound();
+                return NotFound("Aluno não encontrado");
             }
+            _context.Entry(aluno);
 
             return AlunoToDTO(aluno);
+        }
+
+        // GET: api/Aluno/LES
+        [HttpGet("{sigla}")]
+        public async Task<ActionResult<IEnumerable<AlunoDTO>>> GetCurso(string sigla)
+        {
+            if (_context.Alunos == null)
+            {
+                return NotFound("Alunos not found");
+            }
+
+            return await _context.Alunos.Where(x => x.Curso != null && x.Curso.Sigla == sigla).Include(x => x.Curso).Include(x => x.UnidadesCurriculares).Select(x => AlunoToDTO(x)).ToListAsync();
         }
 
         // PUT: api/Aluno/5
@@ -79,25 +82,28 @@ namespace Universidade_Api.Controllers
         {
             if (id != alunoDTO.Id)
             {
-                return BadRequest();
+                return BadRequest("Id do aluno não corresponde ao id do aluno a alterar");
             }
 
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
             if (aluno == null)
             {
-                return NotFound();
+                return NotFound("Aluno não encontrado");
             }
 
             aluno.Nome = alunoDTO.Nome;
-            aluno.Curso = alunoDTO.SiglaCurso;
-
+            aluno.Curso = await _context.Cursos.Where(c => c.Sigla == alunoDTO.SiglaCurso).FirstOrDefaultAsync();
+            if (alunoDTO.SiglasUcs != null)
+            {
+                aluno.UnidadesCurriculares = addAlunoToUc(alunoDTO);
+            }
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException) when (!AlunoExists(id))
             {
-                return NotFound();
+                return NotFound("Aluno não encontrado");
             }
 
             return NoContent();
@@ -108,13 +114,19 @@ namespace Universidade_Api.Controllers
         [HttpPost]
         public async Task<ActionResult<AlunoDTO>> PostAluno(AlunoDTO alunoDTO)
         {
+            if (alunoDTO == null)
+            {
+                return BadRequest("Aluno não pode ser nulo");
+            }
+
             var aluno = new Aluno
             {
                 Nome = alunoDTO.Nome,
-                Curso = alunoDTO.SiglaCurso
+                Curso = await _context.Cursos.Where(c => c.Sigla == alunoDTO.SiglaCurso).FirstOrDefaultAsync(),
+                UnidadesCurriculares = addAlunoToUc(alunoDTO)
             };
 
-            _context.Aluno.Add(aluno);
+            _context.Alunos.Add(aluno);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
@@ -123,18 +135,32 @@ namespace Universidade_Api.Controllers
                 AlunoToDTO(aluno));
         }
 
+        private ICollection<UnidadeCurricular>? addAlunoToUc(AlunoDTO alunoDTO)
+        {
+            ICollection<UnidadeCurricular> ucs = new List<UnidadeCurricular>();
+            if (alunoDTO == null)
+            {
+                return null;
+            }
+            if (alunoDTO.SiglasUcs != null)
+            {
+                ucs = _context.UnidadesCurriculares.Where(u => alunoDTO.SiglasUcs.Contains(u.Sigla)).ToList();
+            }
+            return ucs;
+        }
+
         // DELETE: api/Aluno/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAluno(long id)
         {
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = await _context.Alunos.FindAsync(id);
 
             if (aluno == null)
             {
-                return NotFound();
+                return NotFound("Aluno não encontrado");
             }
 
-            _context.Aluno.Remove(aluno);
+            _context.Alunos.Remove(aluno);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -142,7 +168,7 @@ namespace Universidade_Api.Controllers
 
         private bool AlunoExists(long id)
         {
-            return (_context.Aluno?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
