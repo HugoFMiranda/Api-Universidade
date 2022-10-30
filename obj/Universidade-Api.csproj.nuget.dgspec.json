@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hugo\\Desktop\\SINF2\\Entrega\\Api-Universidade\\Universidade-Api.csproj": {}
+    "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hugo\\Desktop\\SINF2\\Entrega\\Api-Universidade\\Universidade-Api.csproj": {
+    "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hugo\\Desktop\\SINF2\\Entrega\\Api-Universidade\\Universidade-Api.csproj",
+        "projectUniqueName": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj",
         "projectName": "Universidade-Api",
-        "projectPath": "C:\\Users\\Hugo\\Desktop\\SINF2\\Entrega\\Api-Universidade\\Universidade-Api.csproj",
+        "projectPath": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\Universidade-Api.csproj",
         "packagesPath": "C:\\Users\\Hugo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hugo\\Desktop\\SINF2\\Entrega\\Api-Universidade\\obj\\",
+        "outputPath": "C:\\Users\\Hugo\\Desktop\\Api-Universidade\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hugo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,31 +38,31 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.StaticFiles": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[6.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.9, )"
-            },
-            "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[6.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[6.0.10, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.10, )"
             },
-            "Swashbuckle.AspNetCore": {
+            "MySql.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.0.7, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             }
           },
           "imports": [

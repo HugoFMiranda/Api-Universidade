@@ -20,45 +20,8 @@ namespace Universidade_Api.Controllers
             _context = context;
         }
 
-        // GET: api/cursos/populate
-        // It creates a bunch of courses, units, students and grades
-        [HttpGet("populate")]
-        public void PopulateCursos()
-        {
-            _context.Cursos.Add(new Curso { Sigla = "LES", Nome = "Licenciatura em engenharia de sistemas" });
-            _context.Cursos.Add(new Curso { Sigla = "LEI", Nome = "Licenciatura em engenharia informatica" });
-            _context.Cursos.Add(new Curso { Sigla = "LEM", Nome = "Licenciatura em engenharia mecanica" });
-            _context.Cursos.Add(new Curso { Sigla = "LEA", Nome = "Licenciatura em engenharia aeronautica" });
-            _context.Cursos.Add(new Curso { Sigla = "LEQ", Nome = "Licenciatura em engenharia quimica" });
-            _context.Cursos.Add(new Curso { Sigla = "LEP", Nome = "Licenciatura em engenharia petrolifera" });
-            _context.Cursos.Add(new Curso { Sigla = "MIE", Nome = "Mestrado integrado em engenharia" });
-            _context.Cursos.Add(new Curso { Sigla = "MEE", Nome = "Mestrado em engenharia" });
-            _context.SaveChangesAsync();
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "SINF2", Nome = "Sistemas Informação", Ano = 3, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LES") });
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "APROGS", Nome = "Algo. e Prog. LES", Ano = 1, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEI") });
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "APROGM", Nome = "Algo. e Prog. LEM", Ano = 1, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEM") });
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "PPROG", Nome = "Parad. Prog.", Ano = 1, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEI") });
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "P5", Nome = "Programação 5", Ano = 5, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEQ") });
-            _context.UnidadesCurriculares.Add(new UnidadeCurricular { Sigla = "P6", Nome = "Programação 6", Ano = 6, Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEP") });
-            _context.SaveChangesAsync();
-            _context.Alunos.Add(new Aluno { Nome = "Berto", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LES") });
-            _context.Alunos.Add(new Aluno { Nome = "Ana", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEI") });
-            _context.Alunos.Add(new Aluno { Nome = "Carlos", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEM") });
-            _context.Alunos.Add(new Aluno { Nome = "Maria", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEA") });
-            _context.Alunos.Add(new Aluno { Nome = "Rui", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEQ") });
-            _context.Alunos.Add(new Aluno { Nome = "Sara", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "LEP") });
-            _context.Alunos.Add(new Aluno { Nome = "Paulo", Curso = _context.Cursos.FirstOrDefault(x => x.Sigla == "MIE") });
-            _context.SaveChangesAsync();
-            _context.Notas.Add(new Nota { Valor = 12, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "APROGS"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Berto") });
-            _context.Notas.Add(new Nota { Valor = 15, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "APROGM"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Carlos") });
-            _context.Notas.Add(new Nota { Valor = 11, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "PPROG"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Ana") });
-            _context.Notas.Add(new Nota { Valor = 13, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "P4"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Maria") });
-            _context.Notas.Add(new Nota { Valor = 14, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "P5"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Rui") });
-            _context.Notas.Add(new Nota { Valor = 15, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "P6"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Sara") });
-            _context.Notas.Add(new Nota { Valor = 16, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "P1"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Paulo") });
-            _context.Notas.Add(new Nota { Valor = 16, UnidadeCurricular = _context.UnidadesCurriculares.FirstOrDefault(x => x.Sigla == "P1"), Aluno = _context.Alunos.FirstOrDefault(x => x.Nome == "Paulo") });
-            _context.SaveChangesAsync();
-        }
+        // get with query for name in url
+        
 
         // GET: api/cursos/dispose
         /// Used to dispose of the database context
