@@ -29,6 +29,8 @@ namespace Universidade_Api.Controllers
                 Id = aluno.Id,
                 Nome = aluno.Nome,
                 SiglaCurso = siglacurso,
+                Saldo = aluno.Saldo,
+                Email = aluno.Email,
                 SiglasUcs = siglasucs
             };
         }
@@ -75,7 +77,7 @@ namespace Universidade_Api.Controllers
             return await _context.Alunos.Where(x => x.Curso != null && x.Curso.Sigla == sigla).Include(x => x.Curso).Include(x => x.UnidadesCurriculares).Select(x => AlunoToDTO(x)).ToListAsync();
         }
 
-        // PUT: api/Aluno/5
+        // PUT: api/Alunos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAluno(long id, AlunoDTO alunoDTO)
@@ -93,6 +95,8 @@ namespace Universidade_Api.Controllers
 
             aluno.Nome = alunoDTO.Nome;
             aluno.Curso = await _context.Cursos.Where(c => c.Sigla == alunoDTO.SiglaCurso).FirstOrDefaultAsync();
+            aluno.Saldo = alunoDTO.Saldo;
+            aluno.Email = alunoDTO.Email;
             if (alunoDTO.SiglasUcs != null)
             {
                 aluno.UnidadesCurriculares = addAlunoToUc(alunoDTO);
@@ -123,8 +127,19 @@ namespace Universidade_Api.Controllers
             {
                 Nome = alunoDTO.Nome,
                 Curso = await _context.Cursos.Where(c => c.Sigla == alunoDTO.SiglaCurso).FirstOrDefaultAsync(),
+                Saldo = alunoDTO.Saldo,
+                Email = alunoDTO.Email,
                 UnidadesCurriculares = addAlunoToUc(alunoDTO)
             };
+
+            if (aluno.Saldo < 0)
+            {
+                return BadRequest("Saldo não pode ser negativo");
+            }
+            if(aluno.Saldo == null)
+            {
+                aluno.Saldo = 100;
+            }
 
             _context.Alunos.Add(aluno);
             await _context.SaveChangesAsync();
