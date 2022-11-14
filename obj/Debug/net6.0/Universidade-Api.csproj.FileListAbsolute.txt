@@ -12,6 +12,10 @@ C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\K4os.Comp
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\K4os.Hash.xxHash.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\MessagePack.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\MessagePack.Annotations.dll
+C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Http.Cors.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -55,6 +59,7 @@ C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\ZstdNet.d
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\NuGet.Common.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\NuGet.Configuration.dll
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\NuGet.DependencyResolver.Core.dll
@@ -256,8 +261,3 @@ C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\obj\Debug\net6.0\refint\Un
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\obj\Debug\net6.0\Universidade-Api.pdb
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\obj\Debug\net6.0\Universidade-Api.genruntimeconfig.cache
 C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\obj\Debug\net6.0\ref\Universidade-Api.dll
-C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Cors.dll
-C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Net.Http.Formatting.dll
-C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Http.dll
-C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\System.Web.Http.Cors.dll
-C:\Users\Hugo\Desktop\SINF2\Projects\Api-Universidade\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
