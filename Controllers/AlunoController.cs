@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,6 +113,46 @@ namespace Universidade_Api.Controllers
 
             return NoContent();
         }
+
+        // PUT: api/Alunos/5/saldo/debitar
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}/saldo/debitar")]
+        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoDebito(long id, long valor)
+        {
+            var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
+            if (aluno == null)
+            {
+                return NotFound("Aluno não encontrado");
+            }
+            if (aluno.Saldo < 0)
+            {
+                return BadRequest("Saldo negativo");
+            }
+            if (aluno.Saldo < valor)
+            {
+                return BadRequest("Saldo insuficiente. Saldo: " + aluno.Saldo + " valor: " + valor);
+            }
+            aluno.Saldo -= valor;
+            await _context.SaveChangesAsync();
+            return AlunoToDTO(aluno);
+        }
+
+        // PUT: api/Alunos/5/saldo/creditar
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}/saldo/creditar")]
+        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoCredito(long id, long valor)
+        {
+            var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
+            if (aluno == null)
+            {
+                return NotFound("Aluno não encontrado");
+            }
+            aluno.Saldo += valor;
+            await _context.SaveChangesAsync();
+            return AlunoToDTO(aluno);
+        }
+
+
 
         // POST: api/Aluno
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
