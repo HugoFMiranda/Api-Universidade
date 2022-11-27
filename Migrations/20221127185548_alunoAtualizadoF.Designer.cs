@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Universidade_Api;
 
@@ -10,9 +11,10 @@ using Universidade_Api;
 namespace Universidade_Api.Migrations
 {
     [DbContext(typeof(UniversidadeContext))]
-    partial class UniversidadeContextModelSnapshot : ModelSnapshot
+    [Migration("20221127185548_alunoAtualizadoF")]
+    partial class alunoAtualizadoF
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

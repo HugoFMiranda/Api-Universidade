@@ -117,7 +117,7 @@ namespace Universidade_Api.Controllers
         // PUT: api/Alunos/5/saldo/debitar
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}/saldo/debitar")]
-        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoDebito(long id, long valor)
+        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoDebito(long id, Double valor)
         {
             var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
             if (aluno == null)
@@ -140,7 +140,7 @@ namespace Universidade_Api.Controllers
         // PUT: api/Alunos/5/saldo/creditar
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}/saldo/creditar")]
-        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoCredito(long id, long valor)
+        public async Task<ActionResult<AlunoDTO>> PutAlunoSaldoCredito(long id, Double valor)
         {
             var aluno = await _context.Alunos.Include(x => x.Curso).Include(x => x.UnidadesCurriculares).FirstOrDefaultAsync(x => x.Id == id);
             if (aluno == null)
